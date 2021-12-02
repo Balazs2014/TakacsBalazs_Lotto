@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lotto.lotto.HelloController">
+    <rowConstraints>
+        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+        <ColumnConstraints maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+    </columnConstraints>
+    <children>
+        <Button fx:id="btnSorsol" onAction="#sorsolasRendezes" text="Sorsol" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Label fx:id="lblSorsolas" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Label fx:id="lblSorsoltSzamok" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.halignment="CENTER"/>
+    </children>
+</GridPane>
