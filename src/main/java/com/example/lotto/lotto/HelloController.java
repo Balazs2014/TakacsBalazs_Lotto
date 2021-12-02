@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class HelloController {
@@ -19,7 +20,7 @@ public class HelloController {
     private List<Integer> sorsoltSzamok = new ArrayList();
     private boolean otSzamSorsolva = false;
 
-    public void sorsolasRendezes() {
+    public void sorsolasRendezes() throws InterruptedException {
         if (!otSzamSorsolva) {
             szamSorsolas();
         } else {
@@ -27,17 +28,22 @@ public class HelloController {
         }
     }
 
-    public void szamSorsolas() {
-        double randomSzam = Math.random() * 50 + 1;
-        int sorsoltSzam = (int)randomSzam;
-        if (!sorsoltSzamok.contains(sorsoltSzam) && sorsoltSzamok.size() != 5) {
-            sorsoltSzamok.add(sorsoltSzam);
-            lblSorsolas.setText(sorsoltSzam + "");
-            String s = "";
-            for (int szam : sorsoltSzamok) {
-                s += szam + " ";
+    public void szamSorsolas() throws InterruptedException {
+        boolean logikai = true;
+        while (logikai && sorsoltSzamok.size() != 5) {
+            double randomSzam = Math.random() * 90 + 1;
+            int sorsoltSzam = (int) randomSzam;
+            if (!sorsoltSzamok.contains(sorsoltSzam)) {
+                TimeUnit.SECONDS.sleep(2);
+                sorsoltSzamok.add(sorsoltSzam);
+                lblSorsolas.setText(sorsoltSzam + "");
+                logikai = false;
             }
-            lblSorsoltSzamok.setText(s);
+        }
+        String s = "";
+        for (int szam : sorsoltSzamok) {
+            s += szam + " ";
+        lblSorsoltSzamok.setText(s);
         }
 
         if (sorsoltSzamok.size() == 5) {
@@ -47,12 +53,15 @@ public class HelloController {
     }
 
     public void rendezes() {
-        btnSorsol.setText("Start");
+        btnSorsol.setText("Sorsol");
         Collections.sort(sorsoltSzamok);
         String s = "";
         for (int szam: sorsoltSzamok) {
             s += szam + " ";
         }
         lblSorsoltSzamok.setText(s);
+
+        sorsoltSzamok.clear();
+        otSzamSorsolva = false;
     }
 }
